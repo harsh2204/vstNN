@@ -1,0 +1,141 @@
+Run with '--help full' to see extended help for all options.
+Quickstart for effects: D:\Code\WaveNetVA\mrswatson64 -p <plugin> -i <input file> -o <output>
+Quickstart for instruments: D:\Code\WaveNetVA\mrswatson64 -p <name> -m <midi file> -o <output>
+
+  --bit-depth <argument> (default: 16)
+    Bit depth to use for processing. If the input source specifies a bit
+    depth, than that value will override the one set by this option. Valid
+    values for bit depth include: 8, 16, 24, 32.
+
+  --blocksize (or -b) <argument> (default: 512)
+    Blocksize in frames to use for processing. If input source is not an even
+    multiple of the blocksize, then empty frames will be added to the last
+    block.
+
+  --channels (or -c) <argument> (default: 2)
+    Number of channels for output source. If the input source specifies a
+    channel count, then that value will override the one set by this option.
+
+  --color [argument] (default 'auto')
+    Colored logging output. Argument can be 'auto', 'force', or 'none'. If no
+    argument given, 'force' is assumed. If attached to a terminal device,
+    color is used automatically unless 'none' is given to this option.
+
+  --config-file <argument>
+    Load options from a configuration file. The file will be read *after*
+    other options have been parsed, so any options given on the command line
+    will be overriden by those from the file. The file should be plain text,
+    and one argument per line, like so:
+    
+	--plugin-root
+	/path/to/my/plugins
+	--verbose
+
+  --display-info
+    Print information about each plugin in the chain.
+
+  --endian (default 'little')
+    Endian-ness to use when reading and writing raw PCM data. Recognized
+    values are "big" or "little".
+
+  --error-report
+    Generate an error report zipfile on the desktop.
+
+  --help (or -h) [argument] (default 'full')
+    With no arguments, prints a summary of options and their default settings.
+    Otherwise, extended help can be printed for an individual option given by
+    [argument], or use 'full' to print extended help for all options.
+
+  --input (or -i) <argument>
+    Input source to use for processing, where the file type is determined from
+    the extension. Run with --list-file-types to see a list of supported
+    types. Use '-' to read from stdin.
+
+  --list-file-types
+    Print a list of supported file types for input/output sources.
+
+  --list-plugins
+    List available plugins. Useful for determining if a plugin can be 'seen'.
+
+  --log-file <argument> (default 'log.txt')
+    Save logging output to the given file instead of the terminal's standard
+    error.
+
+  --log-level <argument> (default 'info')
+    Logging level to use. Options include: debug, info, warn, error. Critical
+    errors are always logged to console regardless of this setting.
+
+  --max-time <argument> (default: 0)
+    Force processing to stop after <argument> milliseconds, regardless of the
+    input source length. Mostly useful when using internal plugins as sources.
+
+  --midi-file (or -m) <argument>
+    MIDI file to read events from. Required if processing an instrument plugin.
+
+  --output (or -o) [argument] (default 'out.wav')
+    Output source to write processed data to, where the file type is
+    determined from the extension. Run with --list-file-types to see a list of
+    supported types. Use '-' to write to stdout..
+
+  --parameter <argument>
+    Set a parameter in a plugin. May be specified multiple times, but can only
+    set parameters for the first plugin in a chain. Parameter indexes for
+    plugins can be found with the --display-info option. Use comma-separated
+    arguments for index/value, for example:
+    
+	--parameter 1,0.3 --parameter 0,0.75
+
+  --plugin (or -p) <argument>
+    Plugin(s) to process. Multiple plugins can given in a semicolon-separated
+    list, in which case they will be placed into a chain in the order
+    specified. Note that if you specify multiple plugins, you will have to put
+    the argument in quotes or else the shell may mis-interpret it as multiple
+    commands. Instrument plugins must appear first in any chains. Plugins are
+    searched for in the --plugin-root directory, the current directory, and
+    the standard locations for the OS. File extensions are added automatically
+    to plugin names. Each plugin may be followed by a comma with a program to
+    be loaded, which should be of the corresponding file format for the
+    respective plugin. For shell plugins (like Waves), use --display-info to
+    get a list of sub-plugin ID's and then use a colon to indicate which
+    plugin to load. Examples:
+    
+    	--plugin LFX-1310
+    	--plugin 'AutoTune,KayneWest.fxp;Compressor,SoftKnee.fxp;Limiter'
+    	--plugin 'WavesShell-VST' --display-info (list shell sub-plugins)
+    	--plugin 'WavesShell-VST:IDFX' (load a shell plugins)
+
+  --plugin-root <argument>
+    Custom non-system directory to use when searching for plugins. Will be
+    searched   before system directories if given.
+
+  --quiet (or -q)
+    Only log critical errors.
+
+  --realtime
+    Simulate running in realtime by sleeping for any remaining time needed to
+    process the given block. Some plugins which are unable to do offline
+    rendering may require this option in order to function properly.
+
+  --sample-rate (or -s) <argument> (default: 44100)
+    Sample rate to use when processing. If the input source specifies its own
+    sample rate, that value will override the one set by this option. No error
+    checking is done for sample rates (other than requiring it to be greater
+    than 0), however using unusual sample rates will probably result in weird
+    behavior from plugins.
+
+  --tempo <argument> (default: 120)
+    Tempo to use when processing.
+
+  --time-signature <argument> (default '4/4')
+    Set the global time signature. Should be a string formatted like "3/4".
+
+  --verbose (or -v)
+    Verbose logging. Logging output is printed in the following form:
+    (Level) (Frames processed) (Elapsed time in ms) (Logging message)
+
+  --version
+    Print full program version and copyright information.
+
+  --zebra-size <argument> (default: 44100)
+    Alternate logging output colors every <argument> frames.
+
