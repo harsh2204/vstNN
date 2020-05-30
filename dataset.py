@@ -27,7 +27,7 @@ def main(args):
     files = glob.glob(source + f'/*.{ext}' )
     print(f'Found {len(files)} .{ext} files')
 
-    for f in files[:1]:
+    for f in files:
         name, ext = os.path.basename(f).split('.')
         f_out = f'{dest}\\{prefix}{name}{postfix}.{ext}'
 
