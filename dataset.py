@@ -1,9 +1,3 @@
-# Dataset located in data/*BASS and data/*GUITAR*
-# vst2.x plugin dlls located in plugins/*/
-
-# Goal: create a utility to process a set of wav files through a given vst and it's respective parameters and presets using mrswatson
-
-# REPLACE THESE WITH ARGPARSE
 import argparse
 
 def main(args):
