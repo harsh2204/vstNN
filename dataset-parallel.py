@@ -3,7 +3,7 @@ import argparse
 def main(args):
     import os
     import glob
-    import subprocess
+    from subprocess import Popen
 
     source = args.source
     dest = args.dest
@@ -23,9 +23,10 @@ def main(args):
     os.chdir(plugin_dir)
     ext = args.ext
 
-    # print(source)
     files = glob.glob(source + f'/*.{ext}' )
     print(f'Found {len(files)} .{ext} files')
+
+    cmd_list = []
 
     for f in files:
         name, ext = os.path.basename(f).split('.')
@@ -36,7 +37,12 @@ def main(args):
             preset_name = ',' + os.path.basename(preset)
 
         cmd = [mrswatson, '--plugin-root', plugin_dir, '-p', f'{plugin}{preset_name}', '-i', f, '-o', f_out, '-q']
-        subprocess.run(cmd)
+        cmd_list.append(cmd)
+
+    proc_list =[Popen(cmd) for cmd in cmd_list]
+
+    for proc in proc_list:
+        proc.wait()
 
 
 if __name__ == "__main__":
