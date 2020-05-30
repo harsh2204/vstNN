@@ -47,7 +47,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='A batch wav file processor for applying a vst fx over a set of input wav files using mrswatson')
     parser.add_argument('-i', dest='source', required=True, help='Input source files directory containing supported audio files')
     parser.add_argument('-o', dest='dest', required=True, help='Output directory to store the procossed audio files')
     parser.add_argument('-p', dest='plugin', required=True, help='FX plugin to apply to the set of audio files')
